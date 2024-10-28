@@ -5,41 +5,97 @@ import java.util.Random;
 import jconsole.JConsole;
 
 public class SevenEleven {
-	
-	public static void main (String [] args) {
-		
-		// Declare your variables here
-        
+
+    public static void main(String[] args) {
+        // Declarar variables
+        int experiment = 0; // inicializar variable experimento
+        int maxExperiments = 9; // máximo número de intentos posibles
+        boolean matchFound = false;
+
         JConsole console = new JConsole(110, 40);
-        
-        //Random alea = new Random();
         Random alea = new FakeRandom(console);
 
         console.println("--------------------------------");
         console.println("SEVEN-ELEVEN Matching Experiment");
         console.println("--------------------------------\n");
 
-        /* COMPLETE (Use procedure ShowPair whenever possible) */
-        
-        console.println();
-        console.readKey(true);
-        System.exit(0);
-        
-	} // end of main
-	
-	public static void ShowPair(int one, int two, JConsole console)
-    {
+        while (experiment < maxExperiments && !matchFound) { // Mientras los trials no superen 9, entonces...
+            console.print("TRIAL " + (experiment + 1) + " :");
+
+            // inicializadores de contadores, alea1, alea2 y sum
+            int pairCount = 0;
+            int elevenCount = 0;
+            int sevenCount = 0;
+            int one, two, sum;
+
+
+            while (pairCount < 10 && !matchFound) {
+                one = alea.nextInt(1, 7); // alea1
+                two = alea.nextInt(1, 7); // alea2
+                ShowPair(one, two, console);
+                sum = one + two; // Establecer la suma de alea1 alea2 
+                if (sum == 11) {
+                    elevenCount++; // Contador de elevens
+                }
+                if (sum == 7) {
+                    sevenCount++; // Contador de sevens
+                }
+                
+                // Manejo de la continuidad del bucle
+                if (elevenCount == 1 && sevenCount == 1) {
+                    break;
+                } else if (sevenCount >= 2) {
+                    break;
+                } else if (pairCount == 10) {
+                    break;
+                } else if (elevenCount == 1 && sevenCount == 0) {
+                    break;
+                } else {
+                    pairCount++; // Si nada sucede seguir generando parejas
+                }
+
+            }
+
+            // Verificar la suma
+
+
+            if (elevenCount == 1 && sevenCount == 1) { // Seven-Eleven [MATCH]
+                matchFound = true;
+                console.print("[Seven-eleven MATCH]");
+                console.print("\n\n\nSEVEN-ELEVEN Matching experiment ends because:  ");
+                console.setForegroundColor(Color.GREEN);
+                console.print("a MATCH has occured");
+            } else if (sevenCount >= 2) { // Seven excess
+                console.print("[Seven Excess]");
+                experiment++;
+                console.println();
+            } else if (elevenCount == 1 && sevenCount == 0) { // Orphan eleven
+                console.print("[Orphan Eleven]");
+                experiment++;
+                console.println();
+            } else if (pairCount == 10) { // 10 pair
+                console.print("[10 pairs]");
+                experiment++;
+                console.println();
+            }
+
+        }
+    }
+
+
+
+
+    public static void ShowPair(int one, int two, JConsole console) {
         if (one + two == 7) console.setForegroundColor(Color.CYAN);
         else if (one + two == 11) console.setForegroundColor(Color.MAGENTA);
-        console.print("("+one+" "+two+") ");
+        console.print("(" + one + " " + two + ") ");
         console.resetColor();
     }
 
 }
 
 //do not modify this code.
-class FakeRandom extends Random
-{
+class FakeRandom extends Random {
     private static String[] seqs = {
         "2446311116445156",
         "25543425243133635333326465",
@@ -55,8 +111,7 @@ class FakeRandom extends Random
     private int pos = 0;
     private String sequence;
 
-    public FakeRandom (JConsole console)
-    {
+    public FakeRandom(JConsole console) {
         int seqNum;
         console.print("Enter sequence>");
         console.setForegroundColor(Color.GREEN);
@@ -67,18 +122,17 @@ class FakeRandom extends Random
         sequence = seqs[seqNum - 1];
     }
 
-    public  int nextInt(int lower, int upper)
-    {
+    public int nextInt(int lower, int upper) {
         int value;
 
-        value = Integer.parseInt(sequence.substring(pos, pos+1));
+        value = Integer.parseInt(sequence.substring(pos, pos + 1));
 
         pos = (pos + 1) % sequence.length();
         return value;
     }
-    
-    public int nextInt (int upper) {
-    	return nextInt(1, upper)-1;
+
+    public int nextInt(int upper) {
+        return nextInt(1, upper) - 1;
     }
-    
+
 } // FakeRandom ends here
