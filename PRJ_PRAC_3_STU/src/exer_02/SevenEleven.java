@@ -19,7 +19,7 @@ public class SevenEleven {
         console.println("SEVEN-ELEVEN Matching Experiment");
         console.println("--------------------------------\n");
 
-        while (experiment < maxExperiments && !matchFound) { // Mientras los trials no superen 9, entonces...
+        while (experiment < maxExperiments && !matchFound) { // Mientras los trials no superen 9 y no haya match, entonces...
             console.print("TRIAL " + (experiment + 1) + " :");
 
             // inicializadores de contadores, alea1, alea2 y sum
@@ -28,8 +28,8 @@ public class SevenEleven {
             int sevenCount = 0;
             int one, two, sum;
 
-
-            while (pairCount < 10 && !matchFound) {
+            
+            while (pairCount < 10 && !matchFound) { // Mientras haya menos de 10 pares y no haya match, entonces...
                 one = alea.nextInt(1, 7); // alea1
                 two = alea.nextInt(1, 7); // alea2
                 ShowPair(one, two, console);
@@ -54,11 +54,9 @@ public class SevenEleven {
                     pairCount++; // Si nada sucede seguir generando parejas
                 }
 
-            }
+            } 
 
-            // Verificar la suma
-
-
+            // Seguir bucle experimento o parar con MATCH
             if (elevenCount == 1 && sevenCount == 1) { // Seven-Eleven [MATCH]
                 matchFound = true;
                 console.print("[Seven-eleven MATCH]");
