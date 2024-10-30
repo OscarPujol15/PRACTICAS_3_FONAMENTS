@@ -28,8 +28,52 @@ public class GreenBeatsRed {
 
         playTheGame = true;
         while (playTheGame) { 
-        	 /* COMPLETE */
-        } // End of the outer iteration
+        	 while (playTheGame) { 
+        	 console.println("GAME #" + gameNumber + "Spent: " + moneySpent + "Won: " + moneyWon );
+        	 cast=1;
+      	 while(cast<=3) {
+        	console.println ("Game is about to start. Press any key to roll your dice");
+        	console.readKey();
+        	console.println("CAST #" + cast + "\tGeen\tRed\tRed");
+        	console.println("\t\t-----\t-----\t-----");
+        	roll1 = alea.nextInt(1, 7);
+        	roll2 = alea.nextInt(1, 7);
+        	roll3 = alea.nextInt(1, 7);
+        	console.println("\t\t" + roll1 + "\t" + roll2 + "\t" + roll3);
+        	
+        	if (roll1<roll2 || roll1<roll3) {
+            	 playTheGame=false;
+            	 break;
+        }
+        
+        	else if (roll1>roll1 && roll1>roll3) {
+        	console.println("GOOD, green beats the higher red. Press any key to roll the dice again");
+        	
+        }
+        	cast++;
+      	 }
+      	
+      	 console.readKey();
+     gameNumber ++; 	 
+   }
+        } 
+		console.println("NOPE, green does not beat higher red. Gambler, game #" + gameNumber + " ends here");
+        	console.println("OH PITY !!! green die couldn't do it three times");
+        	console.println("but it manage to do it ONCE . YOU WIN TWO bucks");
+       
+
+        answer = console.readChar();
+        if (answer == 'y' || answer == 'Y') {
+        	playTheGame = true;
+        	
+        	}
+        	
+        	else if	(answer ==  'n' || answer ==  'N' ) {
+
+        		}
+        			else {
+        				console.println("Wrong answer");
+        			}// End of the outer iteration
         // why has this point been reached?
         // because player has decided not to play again and as a consequence
         // variable playTheGame has been set to false
