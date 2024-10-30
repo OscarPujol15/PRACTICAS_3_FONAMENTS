@@ -26,54 +26,68 @@ public class GreenBeatsRed {
         Introduction(console); // this is a procedure call. Leave it here. It just show the introduction text
 
 
-        playTheGame = true;
+
+playTheGame = true;
         while (playTheGame) { 
-        	 while (playTheGame) { 
+        	gameNumber ++; 
         	 console.println("GAME #" + gameNumber + "Spent: " + moneySpent + "Won: " + moneyWon );
         	 cast=1;
-      	 while(cast<=3) {
-        	console.println ("Game is about to start. Press any key to roll your dice");
-        	console.readKey();
-        	console.println("CAST #" + cast + "\tGeen\tRed\tRed");
-        	console.println("\t\t-----\t-----\t-----");
-        	roll1 = alea.nextInt(1, 7);
-        	roll2 = alea.nextInt(1, 7);
-        	roll3 = alea.nextInt(1, 7);
-        	console.println("\t\t" + roll1 + "\t" + roll2 + "\t" + roll3);
+         	 console.println ("Game is about to start. Press any key to roll your dice");
+      	 
+         	 while(cast<=3) {
+         		 	console.readKey();
+         		 	console.println("CAST #" + cast + "\tGeen\tRed\tRed");
+         		 	console.println("\t\t-----\t-----\t-----");
+         		 	roll1 = alea.nextInt(1, 7);
+        			roll2 = alea.nextInt(1, 7);
+        			roll3 = alea.nextInt(1, 7);
+        			console.println("\t\t" + roll1 + "\t" + roll2 + "\t" + roll3);
         	
-        	if (roll1<roll2 || roll1<roll3) {
-            	 playTheGame=false;
-            	 break;
-        }
+        				if (roll1 >= Math.max(roll2, roll3)) {
+        					console.println("GOOD, green beats the higher red. Press any key to roll the dice again");
+        				}
         
-        	else if (roll1>roll1 && roll1>roll3) {
-        	console.println("GOOD, green beats the higher red. Press any key to roll the dice again");
+        				else {
+        					console.println("NOPE, green does not beat higher red. Gambler, game #" + gameNumber + " ends here");
+        		
+        				}
         	
-        }
+        				if (roll1<roll2 && cast==1  || roll1<roll3 && cast ==1 ) {
+        					console.println("OH PITY");
+        					cast=4;
+        				}
+        				
+        				
+        				if (cast==3) {
+        					console.println("Excelent! Green won all three casts! You win $60.");
+        					moneyWon += 60;
+        					playTheGame = false;
+        				}
+        				else {
+        					console.print("");
+        				}
         	cast++;
-      	 }
-      	
-      	 console.readKey();
-     gameNumber ++; 	 
-   }
-        } 
-		console.println("NOPE, green does not beat higher red. Gambler, game #" + gameNumber + " ends here");
-        	console.println("OH PITY !!! green die couldn't do it three times");
-        	console.println("but it manage to do it ONCE . YOU WIN TWO bucks");
-       
+      	 } 	
+             console.println("Play again? (y/Y or n/N)");
+             answer = console.readChar();
+             if (answer == 'y' || answer == 'Y') {
+             	playTheGame = true;
+             	
+             	}
+             	
+             	else if	(answer ==  'n' || answer ==  'N' ) {
 
-        answer = console.readChar();
-        if (answer == 'y' || answer == 'Y') {
-        	playTheGame = true;
-        	
-        	}
-        	
-        	else if	(answer ==  'n' || answer ==  'N' ) {
+             		}
+             			else {
+             				while(answer !='y'&& answer !='Y'&& answer !='n'&& answer !='N') {
+             						
+             						console.println("Wrong answer");
+             				answer = console.readChar();
+             				}
+             			}
+  		 }
 
-        		}
-        			else {
-        				console.println("Wrong answer");
-        			}// End of the outer iteration
+	// End of the outer iteration
         // why has this point been reached?
         // because player has decided not to play again and as a consequence
         // variable playTheGame has been set to false
