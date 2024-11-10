@@ -62,7 +62,8 @@ public class SevenEleven {
                 console.print("[Seven-eleven MATCH]");
                 console.print("\n\n\nSEVEN-ELEVEN Matching experiment ends because:  ");
                 console.setForegroundColor(Color.GREEN);
-                console.print("a MATCH has occured");
+                console.print("a MATCH has occurred");
+                console.resetColor();
             } else if (sevenCount >= 2) { // Seven excess
                 console.print("[Seven Excess]");
                 experiment++;
@@ -76,12 +77,16 @@ public class SevenEleven {
                 experiment++;
                 console.println();
             }
+        }
 
+        // Si no ha encontrado ningun MATCH después de los experimentos anteriores
+        if (!matchFound) {
+            console.print("\n\n\nSEVEN-ELEVEN Matching experiment ends because:  ");
+            console.setForegroundColor(Color.RED);
+            console.print("nine UNSUCCESSFUL TRIALS have been done");
+            console.resetColor();
         }
     }
-
-
-
 
     public static void ShowPair(int one, int two, JConsole console) {
         if (one + two == 7) console.setForegroundColor(Color.CYAN);
@@ -89,7 +94,6 @@ public class SevenEleven {
         console.print("(" + one + " " + two + ") ");
         console.resetColor();
     }
-
 }
 
 //do not modify this code.
