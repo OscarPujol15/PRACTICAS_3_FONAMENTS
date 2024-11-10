@@ -7,10 +7,12 @@ import java.util.*;
 public class GreenBeatsRed {
 	
 	public static void main (String [] args) {
-
-        boolean playTheGame; // true if the user wants to play (again)
+	
+	boolean playTheGame; // true if the user wants to play (again)
         char answer; // used to read y/Y/n/N answers from user 
         int gameNumber, moneySpent, moneyWon;
+        int roll1, roll2, roll3;
+        int cast;
         
 
         JConsole console = new JConsole(80, 40);
@@ -22,11 +24,12 @@ public class GreenBeatsRed {
         gameNumber = 0;
         moneySpent = 0;
         moneyWon = 0;
+        
+        
 
         Introduction(console); // this is a procedure call. Leave it here. It just show the introduction text
 
-
-
+        
         playTheGame = true;
         while (playTheGame) { 
         	gameNumber ++; 
@@ -136,8 +139,8 @@ public class GreenBeatsRed {
              				}
              			}
    }
-
-	// End of the outer iteration
+   
+// End of the outer iteration
         // why has this point been reached?
         // because player has decided not to play again and as a consequence
         // variable playTheGame has been set to false
