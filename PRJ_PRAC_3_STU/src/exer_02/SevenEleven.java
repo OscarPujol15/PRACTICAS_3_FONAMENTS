@@ -59,20 +59,24 @@ public class SevenEleven {
             // Seguir bucle experimento o parar con MATCH
             if (elevenCount == 1 && sevenCount == 1) { // Seven-Eleven [MATCH]
                 matchFound = true;
+                console.setCursorPosition(75, console.getCursorRow());
                 console.print("[Seven-eleven MATCH]");
                 console.print("\n\n\nSEVEN-ELEVEN Matching experiment ends because:  ");
                 console.setForegroundColor(Color.GREEN);
                 console.print("a MATCH has occurred");
                 console.resetColor();
             } else if (sevenCount >= 2) { // Seven excess
+            	console.setCursorPosition(75, console.getCursorRow());
                 console.print("[Seven Excess]");
                 experiment++;
                 console.println();
             } else if (elevenCount == 1 && sevenCount == 0) { // Orphan eleven
-                console.print("[Orphan Eleven]");
+            	console.setCursorPosition(75, console.getCursorRow());
+            	console.print("[Orphan Eleven]");
                 experiment++;
                 console.println();
             } else if (pairCount == 10) { // 10 pair
+            	console.setCursorPosition(75, console.getCursorRow());
                 console.print("[10 pairs]");
                 experiment++;
                 console.println();
